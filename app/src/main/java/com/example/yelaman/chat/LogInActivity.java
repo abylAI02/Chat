@@ -2,9 +2,9 @@ package com.example.yelaman.chat;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -22,12 +22,12 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LogInActivity extends AppCompatActivity {
 
+    private static final String TAG = "TAG" + LogInActivity.class.getSimpleName();
     private EditText email;
     private EditText password;
     private Button signIn;
     private TextView signUp;
     private FirebaseAuth mAuth;
-
     private TextWatcher mTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -46,8 +46,6 @@ public class LogInActivity extends AppCompatActivity {
 
         }
     };
-
-    private static final String TAG = "TAG" + LogInActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

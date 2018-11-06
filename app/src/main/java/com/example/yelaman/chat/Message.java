@@ -1,7 +1,5 @@
 package com.example.yelaman.chat;
 
-import java.sql.Date;
-
 public class Message {
     private String message;
     private String name;
@@ -9,7 +7,9 @@ public class Message {
     public Message(String message, String name) {
         this.message = message;
         this.name = name;
+    }
 
+    public Message() {
     }
 
     public String getMessage() {

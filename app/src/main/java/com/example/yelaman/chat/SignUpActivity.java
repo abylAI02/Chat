@@ -1,9 +1,9 @@
 package com.example.yelaman.chat;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -27,12 +27,11 @@ import java.util.HashMap;
 
 public class SignUpActivity extends AppCompatActivity {
 
+    private static final String TAG = "TAG" + SignUpActivity.class.getSimpleName();
     private EditText name, email, password, age;
     private Button signUp;
-
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
-
     private TextWatcher mTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -56,10 +55,6 @@ public class SignUpActivity extends AppCompatActivity {
         }
     };
 
-
-
-    private static final String TAG = "TAG" + SignUpActivity.class.getSimpleName();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +71,6 @@ public class SignUpActivity extends AppCompatActivity {
         email.addTextChangedListener(mTextWatcher);
         password.addTextChangedListener(mTextWatcher);
         age.addTextChangedListener(mTextWatcher);
-
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -128,8 +122,8 @@ public class SignUpActivity extends AppCompatActivity {
         DatabaseReference myRef =
                 database.getReference("users/" + mUser.getUid());
         myRef.updateChildren(new HashMap<String, Object>() {{
-                put("age", age);
-                put("name", name);
+            put("age", age);
+            put("name", name);
         }}).addOnCompleteListener(this, new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -168,7 +162,6 @@ public class SignUpActivity extends AppCompatActivity {
 
             }
         });
-
 
 
     }
