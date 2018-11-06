@@ -34,8 +34,6 @@ public class ChatActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.recyclerViewID);
         mMessages = new ArrayList<>();
 
-        mMessages.add(new Message("Ava", "ara"));
-
         final CustomAdapter adapter = new CustomAdapter(mMessages);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));

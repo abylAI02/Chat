@@ -6,21 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ChatActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerViewID"
-        android:layout_width="368dp"
-        android:layout_height="482dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextMessageText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6" />
-
     <EditText
         android:id="@+id/editTextMessageText"
         android:layout_width="278dp"
@@ -43,5 +28,15 @@
         app:layout_constraintTop_toTopOf="@+id/editTextMessageText"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@android:drawable/ic_menu_send" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewID"
+        android:layout_width="386dp"
+        android:layout_height="507dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextMessageText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
