@@ -46,7 +46,6 @@ public class SignUpActivity extends AppCompatActivity {
             String stringAge = age.getText().toString().trim();
 
             signUp.setEnabled(!stringEmail.isEmpty() && !stringName.isEmpty() && !stringPassword.isEmpty() && !stringAge.isEmpty());
-
         }
 
         @Override
