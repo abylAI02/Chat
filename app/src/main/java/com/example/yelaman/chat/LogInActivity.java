@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +28,25 @@ public class LogInActivity extends AppCompatActivity {
     private TextView signUp;
     private FirebaseAuth mAuth;
 
+    private TextWatcher mTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String stringEmail = email.getText().toString().trim();
+            String stringPassword = password.getText().toString().trim();
+            signIn.setEnabled(!stringEmail.isEmpty() && !stringPassword.isEmpty());
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
     private static final String TAG = "TAG" + LogInActivity.class.getSimpleName();
 
     @Override
@@ -38,7 +59,9 @@ public class LogInActivity extends AppCompatActivity {
         signIn = findViewById(R.id.buttonSignIn);
         signUp = findViewById(R.id.textViewSignUp);
         mAuth = FirebaseAuth.getInstance();
-
+        signIn.setEnabled(false);
+        password.addTextChangedListener(mTextWatcher);
+        email.addTextChangedListener(mTextWatcher);
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,12 +79,12 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     private void changeActivity() {
-        Intent intent = new Intent(LogInActivity.this , SignUpActivity.class);
+        Intent intent = new Intent(LogInActivity.this, SignUpActivity.class);
         startActivity(intent);
     }
 
 
-    private void login()  {
+    private void login() {
         String email = String.valueOf(this.email.getText());
         String password = String.valueOf(this.password.getText());
 
@@ -74,6 +97,8 @@ public class LogInActivity extends AppCompatActivity {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
+                            Intent intent = new Intent(LogInActivity.this, ChatActivity.class);
+                            startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());

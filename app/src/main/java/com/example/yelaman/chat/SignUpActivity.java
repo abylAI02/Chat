@@ -4,6 +4,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +33,30 @@ public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
 
+    private TextWatcher mTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String stringName = name.getText().toString().trim();
+            String stringEmail = email.getText().toString().trim();
+            String stringPassword = password.getText().toString().trim();
+            String stringAge = age.getText().toString().trim();
+
+            signUp.setEnabled(!stringEmail.isEmpty() && !stringName.isEmpty() && !stringPassword.isEmpty() && !stringAge.isEmpty());
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+
 
     private static final String TAG = "TAG" + SignUpActivity.class.getSimpleName();
 
@@ -44,6 +70,13 @@ public class SignUpActivity extends AppCompatActivity {
         password = findViewById(R.id.editTextRegPassword);
         age = findViewById(R.id.editTextAge);
         signUp = findViewById(R.id.buttonRegister);
+        signUp.setEnabled(false);
+
+        name.addTextChangedListener(mTextWatcher);
+        email.addTextChangedListener(mTextWatcher);
+        password.addTextChangedListener(mTextWatcher);
+        age.addTextChangedListener(mTextWatcher);
+
 
 
         mAuth = FirebaseAuth.getInstance();
